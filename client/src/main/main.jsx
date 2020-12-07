@@ -1,7 +1,22 @@
 import React from 'react';
 
-function Main() {
-    return (<div>Hey</div>)
+class Main extends React.Component{
+   constructor(props) {
+       super(props);
+       this.state = {}
+   }
+
+   componentDidMount() {
+       console.log(this.props.match.params.id)
+   }
+
+   render() {
+       return (
+           <div>
+               
+           </div>
+       )
+   }
 }
 
 export default Main;
