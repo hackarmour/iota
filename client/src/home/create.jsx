@@ -1,7 +1,7 @@
 import React from 'react';
 import {useFormik} from 'formik';
 
-function CreateEntity() {
+function CreateProject() {
     const formik = useFormik({
         initialValues: {
             name: '',
@@ -35,4 +35,4 @@ function CreateEntity() {
     )
 }
 
-export default CreateEntity;
+export default CreateProject;

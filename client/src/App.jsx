@@ -2,6 +2,9 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import Nav from './home/nav';
 
+import './fonts.css';
+import './App.sass';
+
 import Home from './home/home';
 import CreateEntity from './home/create';
 import Main from './main/main';
@@ -14,7 +17,7 @@ class App extends React.Component {
           <Route path="/" exact component={Home} />
           <Route path="/create" component={CreateEntity} />
 
-          <Route path="/entity/:id" component={Main} />
+          <Route path="/project/:id" component={Main} />
       </div>
     )
   }

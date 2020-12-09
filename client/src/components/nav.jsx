@@ -7,4 +7,5 @@ export const Logo = styled.h1`
 
 export const NavWrapper = styled.div`
     padding: .8em;
+    background: black;
 `
