@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const Logo = styled.h1`
     color: #53ff35;
+    font-size: 2.5rem;
     font-family: monospace;
 `
 

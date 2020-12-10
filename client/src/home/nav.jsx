@@ -8,7 +8,7 @@ class Nav extends React.Component {
         return (
             <NavWrapper>
                 <Link to="/" style={{textDecoration: 'none'}}>
-                    <Logo>IOTA</Logo>
+                    <Logo className="is-size-1">IOTA</Logo>
                 </Link>
             </NavWrapper>
         )
