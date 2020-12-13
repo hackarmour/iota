@@ -2,9 +2,11 @@ package project
 
 import (
 	"github.com/gofiber/fiber/v2"
+	"gorm.io/gorm"
 )
 
 type Project struct {
+	gorm.Model
 	Name        string
 	Description string
 	ID          int
