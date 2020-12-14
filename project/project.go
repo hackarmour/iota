@@ -32,6 +32,9 @@ func PostProject(c *fiber.Ctx) error {
 		return c.SendString("Unprocessable Entity")
 	}
 	db.Create(&project)
+	if project.ID == 0 {
+		return c.Status(404).SendString("Sorry what ?")
+	}
 	return c.JSON(project)
 }
 
@@ -45,5 +48,8 @@ func GetOne(c *fiber.Ctx) error {
 	}
 
 	db.Where(&Project{ID: id}).Find(&project)
+	if project.ID == 0 {
+		return c.Status(404).SendString("NOT FOUND")
+	}
 	return c.JSON(project)
 }
