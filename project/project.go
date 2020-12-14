@@ -31,6 +31,7 @@ func PostProject(c *fiber.Ctx) error {
 	if err := c.BodyParser(project); err != nil {
 		return c.SendString("Unprocessable Entity")
 	}
+	project.ID = 0
 	db.Create(&project)
 	if project.ID == 0 {
 		return c.Status(404).SendString("Sorry what ?")
