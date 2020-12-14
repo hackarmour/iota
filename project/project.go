@@ -7,6 +7,7 @@ import (
 	"gorm.io/gorm"
 
 	"strconv"
+	"sync"
 )
 
 // Project model
@@ -50,9 +51,19 @@ func GetOne(c *fiber.Ctx) error {
 		return c.SendString("oops")
 	}
 
-	db.Where(&Project{ID: id}).Find(&project)
-	db.Where(&entity.Entity{ProjectID: id}).Find(&entities)
+	var wg sync.WaitGroup
+	wg.Add(2)
+	go func() {
+		db.Where(&Project{ID: id}).Find(&project)
+		wg.Done()
+	}()
 
+	go func() {
+		db.Where(&entity.Entity{ProjectID: id}).Find(&entities)
+		wg.Done()
+	}()
+
+	wg.Wait()
 	if project.ID == 0 {
 		return c.Status(404).SendString("NOT FOUND")
 	}
