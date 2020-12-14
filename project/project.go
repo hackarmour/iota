@@ -3,6 +3,7 @@ package project
 import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/hackarmour/iota/common"
+	"github.com/hackarmour/iota/entity"
 	"gorm.io/gorm"
 
 	"strconv"
@@ -39,18 +40,24 @@ func PostProject(c *fiber.Ctx) error {
 	return c.JSON(project)
 }
 
-// GetOne project
+// GetOne project with all its entities
 func GetOne(c *fiber.Ctx) error {
 	db := common.GetDB()
 	project := &Project{}
+	var entities []entity.Entity
 	id, err := strconv.Atoi(c.Params("id"))
 	if err != nil {
 		return c.SendString("oops")
 	}
 
 	db.Where(&Project{ID: id}).Find(&project)
+	db.Where(&entity.Entity{ProjectID: id}).Find(&entities)
+
 	if project.ID == 0 {
 		return c.Status(404).SendString("NOT FOUND")
 	}
-	return c.JSON(project)
+	return c.JSON(&fiber.Map{
+		"project":  project,
+		"entities": entities,
+	})
 }

@@ -36,6 +36,8 @@ func routes(app *fiber.App) {
 	app.Post("/projects", project.PostProject)
 	app.Get("/projects/:id", project.GetOne)
 
+	app.Post("/entity", entity.CreateEntity)
+
 }
 
 func hello(c *fiber.Ctx) error {

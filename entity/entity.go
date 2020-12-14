@@ -1,12 +1,27 @@
 package entity
 
 import (
+	"github.com/gofiber/fiber/v2"
+	"github.com/hackarmour/iota/common"
 	"gorm.io/gorm"
 )
 
+// Entity model
 type Entity struct {
 	gorm.Model
-	Name      string
-	ProjectID string
 	ID        int
+	Name      string `json:"name"`
+	ProjectID int
+}
+
+// CreateEntity with projectid
+func CreateEntity(c *fiber.Ctx) error {
+	db := common.GetDB()
+	entity := &Entity{}
+	if err := c.BodyParser(entity); err != nil {
+		return c.JSON(err)
+	}
+	entity.ID = 0
+	db.Create(&entity)
+	return c.JSON(entity)
 }
