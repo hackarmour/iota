@@ -14,16 +14,7 @@ import (
 	"github.com/hackarmour/iota/project"
 )
 
-func routes(app *fiber.App) {
-	app.Get("/", hello)
-
-	app.Get("/projects", project.GetProjects)
-	app.Post("/projects", project.PostProject)
-
-}
-
-// Migrate all the models
-func Migrate(db *gorm.DB) {
+func migrate(db *gorm.DB) {
 	db.AutoMigrate(&project.Project{})
 	db.AutoMigrate(&entity.Entity{})
 	db.AutoMigrate(&entityvalues.EntityValues{})
@@ -32,10 +23,19 @@ func Migrate(db *gorm.DB) {
 func main() {
 	app := fiber.New()
 	db := common.Init()
-	Migrate(db)
+	migrate(db)
 
 	routes(app)
 	log.Fatal(app.Listen(":4201"))
+}
+
+func routes(app *fiber.App) {
+	app.Get("/", hello)
+
+	app.Get("/projects", project.GetProjects)
+	app.Post("/projects", project.PostProject)
+	app.Get("/projects/:id", project.GetOne)
+
 }
 
 func hello(c *fiber.Ctx) error {

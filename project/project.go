@@ -4,11 +4,14 @@ import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/hackarmour/iota/common"
 	"gorm.io/gorm"
+
+	"strconv"
 )
 
 // Project model
 type Project struct {
 	gorm.Model
+	ID          int    `json:"ID"`
 	Name        string `json:"name"`
 	Description string `json:"description"`
 }
@@ -29,5 +32,18 @@ func PostProject(c *fiber.Ctx) error {
 		return c.SendString("Unprocessable Entity")
 	}
 	db.Create(&project)
+	return c.JSON(project)
+}
+
+// GetOne project
+func GetOne(c *fiber.Ctx) error {
+	db := common.GetDB()
+	project := &Project{}
+	id, err := strconv.Atoi(c.Params("id"))
+	if err != nil {
+		return c.SendString("oops")
+	}
+
+	db.Where(&Project{ID: id}).Find(&project)
 	return c.JSON(project)
 }
