@@ -15,10 +15,14 @@ import (
 )
 
 func routes(app *fiber.App) {
-	app.Get("/", project.GetProjects)
-	app.Get("/foo", project.CreateDummyProject)
+	app.Get("/", hello)
+
+	app.Get("/projects", project.GetProjects)
+	app.Post("/projects", project.PostProject)
+
 }
 
+// Migrate all the models
 func Migrate(db *gorm.DB) {
 	db.AutoMigrate(&project.Project{})
 	db.AutoMigrate(&entity.Entity{})
@@ -32,4 +36,8 @@ func main() {
 
 	routes(app)
 	log.Fatal(app.Listen(":4201"))
+}
+
+func hello(c *fiber.Ctx) error {
+	return c.SendString("welcome to the iota API server\n")
 }

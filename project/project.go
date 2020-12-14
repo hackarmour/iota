@@ -6,12 +6,14 @@ import (
 	"gorm.io/gorm"
 )
 
+// Project model
 type Project struct {
 	gorm.Model
-	Name        string
-	Description string
+	Name        string `json:"name"`
+	Description string `json:"description"`
 }
 
+// GetProjects gets all the projects
 func GetProjects(c *fiber.Ctx) error {
 	db := common.GetDB()
 	var projects []Project
@@ -19,8 +21,13 @@ func GetProjects(c *fiber.Ctx) error {
 	return c.JSON(projects)
 }
 
-func CreateDummyProject(c *fiber.Ctx) error {
+// PostProject posts a project
+func PostProject(c *fiber.Ctx) error {
 	db := common.GetDB()
-	db.Create(&Project{Name: "Project One", Description: "woooooo"})
-	return c.SendString("wooo")
+	project := &Project{}
+	if err := c.BodyParser(project); err != nil {
+		return c.SendString("Unprocessable Entity")
+	}
+	db.Create(&project)
+	return c.JSON(project)
 }
