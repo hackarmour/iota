@@ -17,7 +17,7 @@ import (
 func migrate(db *gorm.DB) {
 	db.AutoMigrate(&project.Project{})
 	db.AutoMigrate(&entity.Entity{})
-	db.AutoMigrate(&entityvalues.EntityValues{})
+	db.AutoMigrate(&entityvalues.EntityValue{})
 }
 
 func main() {
@@ -37,6 +37,8 @@ func routes(app *fiber.App) {
 	app.Get("/projects/:id", project.GetOne)
 
 	app.Post("/entity", entity.CreateEntity)
+
+	app.Post("/entityValue", entityvalues.PostEntityValue)
 
 }
 
