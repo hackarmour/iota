@@ -10,14 +10,12 @@ import (
 	"github.com/hackarmour/iota/common"
 
 	"github.com/hackarmour/iota/entity"
-	"github.com/hackarmour/iota/entityvalues"
 	"github.com/hackarmour/iota/project"
 )
 
 func migrate(db *gorm.DB) {
 	db.AutoMigrate(&project.Project{})
 	db.AutoMigrate(&entity.Entity{})
-	db.AutoMigrate(&entityvalues.EntityValue{})
 }
 
 func main() {
@@ -37,8 +35,6 @@ func routes(app *fiber.App) {
 	app.Get("/projects/:id", project.GetOne)
 
 	app.Post("/entity", entity.CreateEntity)
-
-	app.Post("/entityValue", entityvalues.PostEntityValue)
 
 }
 
