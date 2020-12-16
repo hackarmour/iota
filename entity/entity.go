@@ -10,7 +10,8 @@ import (
 type Entity struct {
 	gorm.Model
 	ID        int
-	Name      string `json:"name"`
+	Key       string `json:"key"`
+	Value     string `json:"value"`
 	ProjectID int
 }
 
