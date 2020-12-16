@@ -12,7 +12,7 @@ type Entity struct {
 	ID        int
 	Key       string `json:"key"`
 	Value     string `json:"value"`
-	ProjectID int
+	ProjectID int    `json:"projectID"`
 }
 
 // CreateEntity with projectid
