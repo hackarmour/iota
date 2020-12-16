@@ -8,9 +8,8 @@
 
 * Projects
 * Entities
-* Entitity Values
 
-**Project is the top level model, Entity depends on Projects and Entitity Values depend on Entitity**
+**Project is the top level model, Entity depends on Projects**
 
 ==================================
 
@@ -18,22 +17,15 @@
 Projects {
     Name: String;
     Description: String;
-    Id: Int;
+    ID: Int;
 }
 ```
 
 ```
 Entities {
-    Name: String;
-    Id: Int;
-    ProjectId: Int;
-}
-```
-
-```
-EntityValues {
-    Name: String;
-    Id: Int;
-    EntityId: Int;
+    Key: String;
+    Value: String;
+    ID: Int;
+    ProjectID: Int;
 }
 ```
