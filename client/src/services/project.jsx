@@ -7,6 +7,6 @@ export const ProjectService = {
     },
 
     createProject: async function(data) {
-        return await axios.post(ENDPOINT+'projects/'+id, {data})
+        return await axios.post(ENDPOINT+'projects/', {data})
     }
 }

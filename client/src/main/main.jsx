@@ -1,22 +1,25 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import { useFormik } from 'formik';
 
-class Main extends React.Component{
-   constructor(props) {
-       super(props);
-       this.state = {}
-   }
+function Main(props){
 
-   componentDidMount() {
-       console.log(this.props.match.params.id)
-   }
+    const formik = useFormik({
+        initialValues: {
+            key: '',
+            value: ''
+        }, 
+        onSubmit: values => {
+            console.log(values)
+        }
+    })
 
-   render() {
-       return (
-           <div>
-               
-           </div>
-       )
-   }
+    useEffect(() => {
+        console.log(props.match.params.id)
+    })
+
+    return(
+        <div>Hey</div>
+    )
 }
 
 export default Main;
