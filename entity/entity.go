@@ -12,6 +12,7 @@ type Entity struct {
 	ID        int
 	Key       string `json:"key"`
 	Value     string `json:"value"`
+	Note      string `json:"note"`
 	ProjectID int    `json:"projectID"`
 }
 
