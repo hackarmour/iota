@@ -17,7 +17,8 @@ class App extends React.Component {
           <Route path="/" exact component={Home} />
           <Route path="/create" component={CreateEntity} />
 
-          <Route path="/project/:id" component={Main} />
+          <Route path="/project/:id" component={Main} exact />
+          <Route path="/project/:id/new" />
       </div>
     )
   }
