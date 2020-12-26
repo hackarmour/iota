@@ -15,17 +15,18 @@
 
 ```
 Projects {
-    Name: String;
-    Description: String;
-    ID: Int;
+    Name        String
+    Description String
+    ID          Int
 }
 ```
 
 ```
 Entities {
-    Key: String;
-    Value: String;
-    ID: Int;
-    ProjectID: Int;
+    Key       String
+    Value     String
+    Note      String
+    ID        Int
+    ProjectID Int
 }
 ```
