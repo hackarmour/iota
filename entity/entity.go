@@ -1,6 +1,8 @@
 package entity
 
 import (
+	"strconv"
+
 	"github.com/gofiber/fiber/v2"
 	"github.com/hackarmour/iota/common"
 	"gorm.io/gorm"
@@ -26,4 +28,17 @@ func CreateEntity(c *fiber.Ctx) error {
 	entity.ID = 0
 	db.Create(&entity)
 	return c.JSON(entity)
+}
+
+// DeleteEntity deletes
+func DeleteEntity(c *fiber.Ctx) error {
+	db := common.GetDB()
+	id, err := strconv.Atoi(c.Params("id"))
+	if err != nil {
+		return c.SendString("oops")
+	}
+	db.Delete(&Entity{ID: id})
+	return c.JSON(&fiber.Map{
+		"message": "Deleted lol",
+	})
 }
