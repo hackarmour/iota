@@ -33,6 +33,7 @@ func routes(app *fiber.App) {
 	app.Get("/projects", project.GetProjects)
 	app.Post("/projects", project.PostProject)
 	app.Get("/projects/:id", project.GetOne)
+	app.Delete("/projects/:id", project.DeleteProject)
 
 	app.Post("/entity", entity.CreateEntity)
 	app.Delete("/entity/:id", entity.DeleteEntity)

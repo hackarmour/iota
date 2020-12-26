@@ -72,3 +72,16 @@ func GetOne(c *fiber.Ctx) error {
 		"entities": entities,
 	})
 }
+
+// DeleteProject goes brrrr
+func DeleteProject(c *fiber.Ctx) error {
+	db := common.GetDB()
+	id, err := strconv.Atoi(c.Params("id"))
+	if err != nil {
+		return c.SendString("oops")
+	}
+	db.Delete(&Project{ID: id}) // CASCADE ALGORITHM
+	return c.JSON(&fiber.Map{
+		"message": "deleted lol",
+	})
+}
