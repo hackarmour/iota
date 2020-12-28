@@ -42,3 +42,10 @@ func DeleteEntity(c *fiber.Ctx) error {
 		"message": "Deleted lol",
 	})
 }
+
+// UpdateEntity updates
+func UpdateEntity(c *fiber.Ctx) error {
+	return c.JSON(&fiber.Map{
+		"message": "updated",
+	})
+}

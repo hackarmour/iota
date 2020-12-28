@@ -73,6 +73,13 @@ func GetOne(c *fiber.Ctx) error {
 	})
 }
 
+// UpdateProject updates
+func UpdateProject(c *fiber.Ctx) error {
+	return c.JSON(&fiber.Map{
+		"message": "updated",
+	})
+}
+
 // DeleteProject goes brrrr
 func DeleteProject(c *fiber.Ctx) error {
 	db := common.GetDB()

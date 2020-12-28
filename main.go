@@ -34,10 +34,10 @@ func routes(app *fiber.App) {
 	app.Post("/projects", project.PostProject)
 	app.Get("/projects/:id", project.GetOne)
 	app.Delete("/projects/:id", project.DeleteProject)
+	app.Patch("/projects/:id", project.UpdateProject)
 
 	app.Post("/entity", entity.CreateEntity)
 	app.Delete("/entity/:id", entity.DeleteEntity)
-
 }
 
 func hello(c *fiber.Ctx) error {
