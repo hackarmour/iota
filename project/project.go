@@ -80,7 +80,19 @@ func DeleteProject(c *fiber.Ctx) error {
 	if err != nil {
 		return c.SendString("oops")
 	}
-	db.Delete(&Project{ID: id}) // CASCADE ALGORITHM
+	var wg sync.WaitGroup
+	wg.Add(2)
+
+	go func() {
+		db.Delete(&Project{ID: id})
+		wg.Done()
+	}()
+	go func() {
+		var entities []entity.Entity
+		db.Where(&entity.Entity{ProjectID: id}).Delete(&entities)
+		wg.Done()
+	}()
+	wg.Wait()
 	return c.JSON(&fiber.Map{
 		"message": "deleted lol",
 	})
